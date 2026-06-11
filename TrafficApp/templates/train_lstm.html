@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}Train LSTM — Traffic Prediction{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <span class="eyebrow"> Model Training</span>
+  <h1>Long Short-Term <span>Memory</span></h1>
+  <p>Train LSTM — the top-performing model with the lowest RMSE error. Best suited for capturing long-range traffic patterns.</p>
+</div>
+
+<div class="info-banner">
+  <span class="info-banner-icon"></span>
+  <span>LSTM uses cell states and three gating mechanisms to retain long-term memory, outperforming both Simple RNN and GRU on this dataset.</span>
+</div>
+<br>
+
+<!-- ===== TRAIN BUTTON ===== -->
+<div class="form-section">
+  <h2 class="section-title mb-1">Start Training</h2>
+  <p class="section-sub">Click below to begin training the LSTM model on the full traffic dataset.</p>
+  <br>
+  <form method="post" action="{% url 'train_lstm' %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary btn-lg">
+       Train LSTM Model
+    </button>
+  </form>
+</div>
+
+{% if graph %}
+<!-- ===== GRAPH OUTPUT ===== -->
+<div class="result-panel mt-3">
+  <div class="result-panel-header">
+    <span style="color:var(--teal);font-size:1rem"></span>
+    <h3>Prediction Graph — LSTM</h3>
+    <span class="badge badge-teal">&#10003; Best Model</span>
+  </div>
+  <div class="result-panel-body">
+
+    <div class="graph-container mb-2">
+      <img src="data:image/png;base64,{{ graph }}" alt="LSTM Prediction Graph">
+    </div>
+
+    <p style="font-size:0.85rem;color:var(--text-3)">
+      Red line = actual traffic values &nbsp;&bull;&nbsp; Green line = predicted values.<br>
+      LSTM shows the tightest overlap between predicted and actual — minimal gap visible.
+    </p>
+
+    <hr class="divider">
+
+    <div class="metric-highlight">
+      <span class="metric-val">{{ rmse }}</span>
+      <span class="metric-lbl">RMSE Error (lowest)</span>
+    </div>
+
+    <!-- Model comparison mini-table -->
+    <div class="card mt-3" style="padding:1rem">
+      <h3 style="font-size:0.85rem;color:var(--text-3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.75rem">Quick Comparison</h3>
+      <div style="display:flex;flex-direction:column;gap:.5rem">
+        <div style="display:flex;justify-content:space-between;font-size:.875rem">
+          <span style="color:var(--text-2)">Simple RNN</span>
+          <span style="color:var(--coral);font-weight:600">3.56 RMSE</span>
+        </div>
+        <div class="progress-bar-track"><div class="progress-bar-fill" style="width:42%;background:var(--coral)"></div></div>
+        <div style="display:flex;justify-content:space-between;font-size:.875rem">
+          <span style="color:var(--text-2)">GRU</span>
+          <span style="color:var(--amber);font-weight:600">2.86 RMSE</span>
+        </div>
+        <div class="progress-bar-track"><div class="progress-bar-fill" style="width:25%;background:var(--amber)"></div></div>
+        <div style="display:flex;justify-content:space-between;font-size:.875rem">
+          <span style="color:var(--text-1);font-weight:500">LSTM</span>
+          <span style="color:var(--teal);font-weight:600">{{ rmse }} RMSE &#10003;</span>
+        </div>
+        <div class="progress-bar-track"><div class="progress-bar-fill" style="width:10%"></div></div>
+      </div>
+    </div>
+
+    <div class="flex gap-2 mt-3" style="flex-wrap:wrap">
+      <a href="{% url 'predict' %}" class="btn btn-primary">Predict Traffic &rarr;</a>
+      <a href="{% url 'index' %}"   class="btn btn-outline">Back to Home</a>
+    </div>
+
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}

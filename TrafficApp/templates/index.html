@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <h1>Traffic Flow Prediction</h1>
+  <p>
+    <!-- Compare RNN, GRU and LSTM models trained on real traffic data.
+    Predict hourly traffic with accuracy. -->
+  </p>
+</section>
+
+<!-- ===== STATS ===== -->
+<section class="stats">
+  <div class="stat">
+    <h2>48K</h2>
+    <p>Records</p>
+  </div>
+  <!-- <div class="stat">
+    <h2>4</h2>
+    <p>Junctions</p>
+  </div> -->
+  <div class="stat">
+    <h2>3</h2>
+    <p>Models</p>
+  </div>
+  <!-- <div class="stat">
+    <h2>LSTM</h2>
+    <p>Best Model</p>
+  </div> -->
+</section>
+
+<!-- ===== ACTIONS ===== -->
+<section class="cards">
+
+  <div class="card">
+    <h3>Train RNN</h3>
+    <p>Baseline recurrent neural network model.</p>
+    <br>
+    <a href="{% url 'train_rnn' %}" class="btn">Start</a>
+  </div>
+
+  <div class="card">
+    <h3>Train GRU</h3>
+    <p>Improved model with better efficiency.</p>
+    <br>
+    <a href="{% url 'train_gru' %}" class="btn">Start</a>
+  </div>
+
+  <div class="card">
+    <h3>Train LSTM</h3>
+    <p>Best performing model with lowest error.</p>
+    <br>
+    <a href="{% url 'train_lstm' %}" class="btn">Start</a>
+  </div>
+
+  <div class="card">
+    <h3>Predict Traffic</h3>
+    <p>Generate 24-hour traffic predictions.</p>
+    <br>
+    <a href="{% url 'predict' %}" class="btn">Predict</a>
+  </div>
+
+</section>
+
+{% endblock %}

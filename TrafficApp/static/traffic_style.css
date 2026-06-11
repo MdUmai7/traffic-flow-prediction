@@ -1,0 +1,208 @@
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== BASE ===== */
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #f9fafb;
+  color: #111827;
+  line-height: 1.6;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 1.5rem;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #4b5563;
+  font-size: 0.9rem;
+}
+
+.nav-links a:hover {
+  color: #111827;
+}
+
+/* ===== PAGE HEADER (ALL PAGES) ===== */
+.page-header {
+  margin: 2rem 0 1.5rem;
+}
+
+.page-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.page-header p {
+  color: #6b7280;
+  max-width: 600px;
+}
+
+/* ===== CARD SYSTEM ===== */
+.card,
+.form-section,
+.result-panel {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ===== BUTTON ===== */
+.btn {
+  display: inline-block;
+  background: #111827;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.btn:hover {
+  background: #000;
+}
+
+/* ===== FORM ===== */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+}
+
+.form-hint {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-top: 0.3rem;
+}
+
+/* ===== GRAPH ===== */
+.graph-container img {
+  width: 100%;
+  border-radius: 6px;
+}
+
+/* ===== RESULT HEADER ===== */
+.result-panel-header {
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+/* ===== STATUS ===== */
+.traffic-status {
+  padding: 0.8rem;
+  border-radius: 6px;
+  margin-top: 1rem;
+}
+
+.status-low {
+  background: #ecfdf5;
+}
+
+.status-medium {
+  background: #fffbeb;
+}
+
+.status-high {
+  background: #fef2f2;
+}
+
+/* ===== HOME PAGE EXTRA ===== */
+.hero {
+  margin: 2rem 0;
+}
+
+.hero h1 {
+  font-size: 2.2rem;
+}
+
+.hero p {
+  color: #6b7280;
+}
+
+.stats {
+  display: flex;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.stat {
+  flex: 1;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  padding: 1.5rem;
+  color: #6b7280;
+  font-size: 0.8rem;
+  margin-top: 2rem;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 700px) {
+  .stats {
+    flex-direction: column;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+}

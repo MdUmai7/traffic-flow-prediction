@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Train GRU — Traffic Prediction{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <span class="eyebrow"> Model Training</span>
+  <h1>Gated Recurrent <span>Unit</span></h1>
+  <p>Train a GRU model — a more efficient architecture than Simple RNN, achieving lower RMSE with fewer parameters.</p>
+</div>
+
+<div class="info-banner">
+  <span class="info-banner-icon"></span>
+  <span>GRU uses reset and update gates to better capture temporal dependencies than Simple RNN. Training may take a few minutes.</span>
+</div>
+<br>
+
+<!-- ===== TRAIN BUTTON ===== -->
+<div class="form-section">
+  <h2 class="section-title mb-1">Start Training</h2>
+  <p class="section-sub">Click below to begin training the GRU model on the full traffic dataset.</p>
+  <br>
+  <form method="post" action="{% url 'train_gru' %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-amber btn-lg">
+       Train GRU Model
+    </button>
+  </form>
+</div>
+
+{% if graph %}
+<!-- ===== GRAPH OUTPUT ===== -->
+<div class="result-panel mt-3">
+  <div class="result-panel-header">
+    <span style="color:var(--amber);font-size:1rem"></span>
+    <h3>Prediction Graph — GRU</h3>
+    <span class="badge badge-amber">RMSE: {{ rmse }}</span>
+  </div>
+  <div class="result-panel-body">
+
+    <div class="graph-container mb-2">
+      <img src="data:image/png;base64,{{ graph }}" alt="GRU Prediction Graph">
+    </div>
+
+    <p style="font-size:0.85rem;color:var(--text-3)">
+      Red line = actual traffic values &nbsp;&bull;&nbsp; Green line = predicted values.
+    </p>
+
+    <hr class="divider">
+
+    <div class="metric-highlight" style="background:var(--amber-pale);border-color:rgba(245,166,35,0.25)">
+      <span class="metric-val" style="color:var(--amber)">{{ rmse }}</span>
+      <span class="metric-lbl">RMSE Error</span>
+    </div>
+
+    <p style="font-size:0.88rem;color:var(--text-2);margin-top:0.75rem">
+      GRU achieves <strong style="color:var(--amber)">lower error</strong> than Simple RNN (3.56).
+      Try LSTM for the best possible accuracy.
+    </p>
+
+    <div class="flex gap-2 mt-3" style="flex-wrap:wrap">
+      <a href="{% url 'train_lstm' %}" class="btn btn-primary">Train LSTM &rarr;</a>
+      <a href="{% url 'predict' %}"    class="btn btn-outline">Predict Traffic</a>
+    </div>
+
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}

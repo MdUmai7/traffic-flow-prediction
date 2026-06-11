@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block title %}Predict Traffic — Traffic Prediction{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <span class="eyebrow">LSTM Inference</span>
+  <h1>Predict <span>Traffic Volume</span></h1>
+  <p>
+    Enter a junction ID (1–4) or area name to generate a 24-hour hourly
+    traffic volume prediction using the trained LSTM model.
+  </p>
+</div>
+
+<!-- ===== FORM ===== -->
+<div class="form-section">
+  <h2 class="section-title mb-1">Junction Input</h2>
+  <p class="section-sub">
+    Provide a value between 1 and 4, or use a custom area label.
+  </p>
+
+  <form method="POST" action="{% url 'predict' %}">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <br>
+      <label for="area">Junction / Area Name</label>
+
+      <input
+        type="text"
+        id="area"
+        name="area"
+        class="form-control"
+        placeholder="e.g. 1 or Ghatkesar or Nagpur"
+        value="{{ area|default:'' }}"
+        autocomplete="off"
+      >
+
+      <!-- <p class="form-hint">
+        Junction IDs: 1, 2, 3, or 4. You may also enter a descriptive area name.
+      </p> -->
+    </div>
+
+    <button type="submit" class="btn">
+      Generate Prediction
+    </button>
+  </form>
+</div>
+
+{% if graph %}
+<!-- ===== RESULTS ===== -->
+<div class="result-panel mt-3">
+  <div class="result-panel-header">
+    <h3>24-Hour Traffic Forecast — {{ area }}</h3>
+  </div>
+
+  <div class="result-panel-body">
+
+    <div class="graph-container mb-2">
+      <img src="data:image/png;base64,{{ graph }}" alt="Traffic Graph">
+    </div>
+
+    <!-- {% if status %}
+    <div class="traffic-status
+      {% if status == 'Low' %}status-low
+      {% elif status == 'Medium' %}status-medium
+      {% else %}status-high{% endif %}">
+      <strong>{{ area }}</strong> — {{ status }} traffic
+    </div>
+    {% endif %} -->
+    <div class="traffic-info mt-2">
+  <p><strong>Peak Traffic:</strong> {{ peak_value }} vehicles at {{ peak_hour }}</p>
+  <p><strong>Average Traffic:</strong> {{ avg_value }} vehicles</p>
+</div>
+
+    <div class="flex gap-2 mt-3" style="flex-wrap:wrap">
+      <a href="{% url 'predict' %}" class="btn btn-outline">New</a>
+      <a href="{% url 'index' %}" class="btn btn-outline">Home</a>
+    </div>
+
+  </div>
+</div>
+{% endif %}
+
+<!--  JS ALWAYS LOADS ::if nothing entered and clicked genereate prediction a alert comes-->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const form = document.querySelector("form");
+
+  if (form) {
+    form.addEventListener("submit", function(e) {
+
+      const input = document.getElementById("area");
+
+      if (!input.value.trim()) {
+        e.preventDefault();
+        alert("Please enter a junction or area name");
+      }
+
+    });
+  }
+
+});
+</script>
+<!--  -->
+
+{% endblock %}

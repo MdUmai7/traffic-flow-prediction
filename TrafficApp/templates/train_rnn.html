@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Train Simple RNN — Traffic Prediction{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <span class="eyebrow"> Model Training</span>
+  <h1>Simple <span>RNN</span></h1>
+  <p>Train a Simple Recurrent Neural Network on the junction traffic dataset and evaluate its prediction accuracy.</p>
+</div>
+
+<div class="info-banner">
+  <span class="info-banner-icon"></span>
+  <span>Training may take a few minutes depending on your hardware. The graph will display automatically when complete.</span>
+</div>
+<br>
+
+<!-- ===== TRAIN BUTTON ===== -->
+<div class="form-section">
+  <h2 class="section-title mb-1">Start Training</h2>
+  <p class="section-sub">Click below to begin training the Simple RNN model on the full traffic dataset.</p>
+  <br>
+  <form method="post" action="{% url 'train_rnn' %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary btn-lg">
+       Train Simple RNN
+    </button>
+  </form>
+</div>
+
+{% if graph %}
+<!-- ===== GRAPH OUTPUT ===== -->
+<div class="result-panel mt-3">
+  <div class="result-panel-header">
+    <span style="color:var(--teal);font-size:1rem"></span>
+    <h3>Prediction Graph — Simple RNN</h3>
+    <span class="badge badge-coral">RMSE: {{ rmse }}</span>
+  </div>
+  <div class="result-panel-body">
+
+    <div class="graph-container mb-2">
+      <img src="data:image/png;base64,{{ graph }}" alt="RNN Prediction Graph">
+    </div>
+
+    <p style="font-size:0.85rem;color:var(--text-3)">
+      Red line = actual traffic values &nbsp;&bull;&nbsp; Green line = predicted values.<br>
+      The X-axis shows test data points; Y-axis shows vehicle volume.
+    </p>
+
+    <hr class="divider">
+
+    <div class="metric-highlight">
+      <span class="metric-val">{{ rmse }}</span>
+      <span class="metric-lbl">RMSE Error</span>
+    </div>
+
+    <p style="font-size:0.88rem;color:var(--text-2);margin-top:0.75rem">
+      Simple RNN RMSE is <strong style="color:var(--coral)">higher</strong> than GRU and LSTM,
+      making it the baseline model. Train GRU or LSTM for improved accuracy.
+    </p>
+
+    <div class="flex gap-2 mt-3" style="flex-wrap:wrap">
+      <a href="{% url 'train_gru' %}"  class="btn btn-outline">Train GRU &rarr;</a>
+      <a href="{% url 'train_lstm' %}" class="btn btn-outline">Train LSTM &rarr;</a>
+    </div>
+
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}

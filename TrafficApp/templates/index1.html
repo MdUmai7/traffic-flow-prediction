@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<title>Evaluating LSTM Performance</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+</head>
+<body>
+<div id="wrapper">
+	<div id="header">
+		<div id="logo">
+			<center><font size="4" color="yellow">Evaluating the Performance of LSTM in Traffic
+Flow Prediction </font></center>
+		</div>
+		<div id="slogan">
+			
+		</div>
+	</div>
+	<div id="menu">
+
+	
+		<ul><center>
+			<li class="first current_page_item"><a href="{% url 'TrainRNN' %}"><font size="" color="yellow">Train Simple RNN</font></a></li>
+			<li class="first current_page_item"><a href="{% url 'TrainGRU' %}"><font size="" color="yellow">Train GRU</font></a></li>
+			<li class="first current_page_item"><a href="{% url 'TrainLSTM' %}"><font size="" color="yellow">Train LSTM</font></a></li>
+			<li class="first current_page_item"><a href="{% url 'Predict' %}"><font size="" color="yellow">Predict Traffic</font></a></li>
+			
+		</center></ul>
+		<br class="clearfix" />
+	</div>
+	<div id="splash">
+		<img class="pic" src="{% static 'images/investor.jpg' %}" width="870" height="230" alt="" />
+	</div>
+	<br/>
+	<p align="justify"><font size="3" color="black"  style="font-family: Comic Sans MS">
+	Abstract:-Traffic congestion in smart and major cities has been one of the main problems in traffic management and system guidance. Due to the fast economic growth and the highly increasing number of vehicles, the first challenge is to successfully predict accurate traffic flow information to minimize traffic congestion and traffic accidents. Not long ago, many researchers have started to focus more and more concentration on deep learning techniques, including Recurrent Neural Networks (RNN).</p>
+<p align="justify"><font size="3" color="black" style="font-family: Comic Sans MS">This project has applied three different kinds of recurrent neural network architecture such as simple RNN, Long Short Term Memory (LSTM) and Gated Recurrent Unit (GRU) by considering different time intervals.</p>
+</body>
+</html>

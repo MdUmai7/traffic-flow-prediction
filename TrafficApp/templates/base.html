@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Traffic Prediction{% endblock %}</title>
+
+  <link rel="stylesheet" href="{% static 'traffic_style.css' %}">
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+  <div class="container nav-inner">
+    
+    <div class="logo">TrafficFlow</div>
+
+    <div class="nav-links">
+      <a href="{% url 'index' %}">Home</a>
+      <a href="{% url 'train_rnn' %}">RNN</a>
+      <a href="{% url 'train_gru' %}">GRU</a>
+      <a href="{% url 'train_lstm' %}">LSTM</a>
+      <a href="{% url 'predict' %}">Predict</a>
+    </div>
+
+  </div>
+</nav>
+<!-- ===== CONTENT ===== -->
+<main class="container">
+  {% block content %}{% endblock %}
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  Traffic Prediction System • LSTM • RNN • GRU
+</footer>
+
+
+<!-- loader -->
+ <div id="loader" style="
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(255,255,255,0.8);
+  align-items:center;
+  justify-content:center;
+  font-size:1.2rem;
+  z-index:999;
+">
+  Training model... please wait
+</div>
+<!--  -->
+<!-- js -->
+
+<script>
+
+  // ===== 1. SHOW LOADER(Training model... please wait)ON BUTTON CLICK =====
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const loader = document.getElementById('loader');
+      if (loader) loader.style.display = 'flex';
+    });
+  });
+
+
+  // ===== 2. DISABLE BUTTON AFTER CLICK::when button clicked the text on button changes to processing =====
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+      this.innerText = "Processing...";
+      this.style.pointerEvents = "none";
+    });
+  });
+
+
+  
+
+
+  // ===== 4. ACTIVE NAVBAR LINK...color =====
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    if (link.href === window.location.href) {
+      link.style.fontWeight = "600";
+      link.style.color = "#8B0000";
+    }
+  });
+
+</script>
+
+
+<!--  -->
+
+</body>
+</html>
